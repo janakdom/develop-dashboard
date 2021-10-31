@@ -1,12 +1,16 @@
-# Hlavní rozcestník
+# Hlavní rozcestník vývoje
 Můj vývojový rozcestník, který obsahuje veškerá potřebná data a odkazy. 
 
 ### Lokální webové odkazy
 
-| Služba | Adresa | Popis |
-|--------|--------|-------|
-| DominikJanak.loc | [dominikjanak.loc](http://dominikjanak.loc/) ::br:: [sso.dominikjanak.loc](http://sso.dominikjanak.loc/) | Osobní web ([CI](https://app.travis-ci.com/github/janakdom/dominikjanak-backend)) |
-| MailHog | [mailhog.loc:8025](http://mailhog.loc:8025/#) | Zachytávač testovacích emalů |
+| Služba | Adresa | Link  | Popis |
+|--------|--------|--------|-------|
+| PhpMyAdmin | [pma.loc](http://pma.loc/) ::br:: [phpmyadmin.loc](http://phpmyadmin.loc/) |  | PhpMyAdmin |
+| Osobní web | [dominikjanak.loc](http://dominikjanak.loc/) ::br:: [sso.dominikjanak.loc](http://sso.dominikjanak.loc/) | [![Backend][gd]][dj_be]::nbsp::[![Travis CI][tr]][dj_ci] | SSO a API ([CI](https://app.travis-ci.com/github/janakdom/dominikjanak-backend)) |
+| Kuchařka | [cookbook.loc](http://cookbook.loc/) | [![Backend][gd]][cb_be]::nbsp::[![Frontend][gl]][cb_fe]::nbsp::[![Travis CI][tr]][cb_ci] | Kuchařka backend |
+| Symfony 6 | [symfony6.loc](http://symfony6.loc/) |  | Test Symfony6 |
+| Test | [test.loc](http://test.loc/) |  | Testing domain |
+| MailHog | [mailhog.loc:8025](http://mailhog.loc:8025/#) |  | Zachytávač testovacích emalů |
 
 ### Lokální služby
 | Služba | Adresa | Popis |
@@ -15,8 +19,8 @@ Můj vývojový rozcestník, který obsahuje veškerá potřebná data a odkazy.
 
 ### Další odkazy
 
-| Název                                 | Popis                                                                        |  
-|---------------------------------------|------------------------------------------------------------------------------|
+| Název                                 | Popis                                          |  
+|---------------------------------------|------------------------------------------------|
 | [Brand colors](https://brandcolors.net/) | Paleta korporátních barev |
 | [Amp-what](http://www.amp-what.com/) | Databáze znaků |
 | [Stackedit](https://stackedit.io/app#) | Web MD editor |
@@ -34,3 +38,15 @@ Můj vývojový rozcestník, který obsahuje veškerá potřebná data a odkazy.
 
 -----
 &copy; 2021 &bull; Dominik Janák &bull; DevServer
+
+[//]: <> (Images)
+[gl]: </assets/images/github_light_16.png>
+[gd]: </assets/images/github_dark_16.png>
+[tr]: </assets/images/travis_16.png>
+
+[//]: <> (Links)
+[dj_be]: <https://github.com/janakdom/dominikjanak-backend>
+[dj_ci]: <https://app.travis-ci.com/github/janakdom/dominikjanak-backend>
+[cb_be]: <https://github.com/janakdom/cookbook-backend>
+[cb_fe]: <https://github.com/janakdom/cookbook-frontend>
+[cb_ci]: <https://app.travis-ci.com/github/janakdom/cookbook-backend>

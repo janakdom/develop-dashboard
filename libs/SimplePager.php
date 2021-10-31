@@ -291,8 +291,8 @@ class SimplePager
             'route_valid'       => false,
             'route'             => null,
             'rewrites'          => [
-                'search'  => ['::br::'],
-                'replace' => ['<br />']
+                'search'  => ['::br::', '::nbsp::'],
+                'replace' => ['<br />', '&nbsp;']
             ]
         ];
     }
