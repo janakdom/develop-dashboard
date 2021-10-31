@@ -66,7 +66,8 @@ class SimplePager
         $output = $this->getCache(true);
 
         if (empty($output)) {
-            $output = $this->generateCode();
+            $title = $this->getTitle();
+            $output = $this->generateCode($title);
             if (!empty($output)) {
                 $this->saveCache($output);
             } else {
@@ -82,7 +83,7 @@ class SimplePager
      *
      * @param string $route
      */
-    public function applyRoute(string $route = 'index')
+    public function applyRoute(string $route = 'index') :bool
     {
         $route = $this->router($route);
         $this->params['route'] = $route;
@@ -97,7 +98,7 @@ class SimplePager
                 $this->clearCache($this->params['cache'], true);
             }
             $this->params['route_valid'] = true;
-            return;
+            return true;
         }
 
         $this->params['source'] = sprintf("%s/%s.%s",
@@ -118,10 +119,11 @@ class SimplePager
 
         if ((!file_exists($this->params['cache_file']) || !$this->config['use_cache']) && !file_exists($this->params['source'])) {
             $this->params['route_valid'] = false;
-            return;
+            return false;
         }
 
         $this->params['route_valid'] = true;
+        return true;
     }
 
     /**
@@ -158,11 +160,27 @@ class SimplePager
     }
 
     /**
-     * Generate html from source file
+     * Get page title
      *
      * @return string
      */
-    private function generateCode() :string
+    private function getTitle() :string
+    {
+        $route = $this->params['route'];
+
+        if (!empty($route)) {
+            return sprintf('%s :: %s', $this->config['title'], $route);
+        }
+        return $this->config['title'];
+    }
+
+    /**
+     * Generate html from source file
+     *
+     * @param string $title page title
+     * @return string
+     */
+    private function generateCode(string $title) :string
     {
         if (!$this->config['use_cache'] || file_exists($this->params['source'])) {
             $md = file_get_contents($this->params['source']);
@@ -180,8 +198,8 @@ class SimplePager
             }
 
             $html = str_replace(
-                array_merge(["{{content}}"], $this->params['rewrites']['search']),
-                array_merge([$html], $this->params['rewrites']['replace']),
+                array_merge(["{{content}}", '{{title}}'], $this->params['rewrites']['search']),
+                array_merge([$html, $title], $this->params['rewrites']['replace']),
                 $template);
 
             if ($this->minifier) {
@@ -197,7 +215,7 @@ class SimplePager
      *
      * @param string $code html code
      */
-    private function saveCache(string $code)
+    private function saveCache(string $code) :void
     {
         $mask = umask();
         umask(2);
@@ -218,7 +236,7 @@ class SimplePager
      * @param string $directory root directory
      * @param bool $delete delete root directory
      */
-    private function clearCache(string $directory, bool $delete = false)
+    private function clearCache(string $directory, bool $delete = false) :void
     {
         $contents = glob($directory . '/*');
 
@@ -253,7 +271,7 @@ class SimplePager
     /**
      * Default/initial configuration
      */
-    private function applyDefaultConfig()
+    private function applyDefaultConfig() :void
     {
         $this->config = [
             'use_cache'    => true,
@@ -261,7 +279,8 @@ class SimplePager
             'pages_source' => 'pages',
             'index'        => 'index',
             'source_type'  => 'md',
-            'template'     => null
+            'template'     => null,
+            'title'        => 'Pager',
         ];
 
         $this->params = [

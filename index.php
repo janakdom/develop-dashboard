@@ -23,8 +23,7 @@ $pager = new SimplePager($parsedown, [
 
 $code = "";
 try {
-    $pager->applyRoute($_SERVER['REQUEST_URI']);
-    if ($pager->isRouteValid()) {
+    if ($pager->applyRoute($_SERVER['REQUEST_URI'])) {
         $code = $pager->getPageCode();
     } else {
         $code = "<h2 style='color: #cf222e'>Route not found!</h2>";
